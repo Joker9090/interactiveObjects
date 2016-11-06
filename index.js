@@ -223,8 +223,8 @@ module.exports = {
       co_self.objectsByLayer[_object.layer][co_self.objectsByLayer[_object.layer].length] = _object;
 
 
-      _object.startPosX = _object.posX
-      _object.startPosY = _object.posY
+      // _object.startPosY = _object.posY
+      // _object.startPosX = _object.posX
       return _object;
     }
 
@@ -246,6 +246,7 @@ module.exports = {
       o = co_self.getAllObjects()
       co_self.focusXEnabled = true;
       for (var i = 0; i < o.length; i++) {
+        o[i].startPosX = o[i].posX
         if((o[i].id == obj.id)){
           o[i].focus_x = true;
           co_self.focusedObject = obj;
@@ -265,6 +266,7 @@ module.exports = {
       o = co_self.getAllObjects()
       co_self.focusYEnabled = true;
       for (var i = 0; i < o.length; i++) {
+        o[i].startPosY = o[i].posY
         if((o[i].id == obj.id)){
           o[i].focus_y = true;
           co_self.focusedObject = obj;
