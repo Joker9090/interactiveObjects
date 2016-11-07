@@ -333,7 +333,6 @@ module.exports = {
 
     co_self.checkHorizontalColision = function(Obj,x){
       that = this;
-      console.log(that.objectsByLayer[Obj.layer].length)
       if(Obj.solid == 0) return true;
       if(that.objectsByLayer[Obj.layer].length < 2) return true
       H_objs = that.objectsByLayer[Obj.layer];
