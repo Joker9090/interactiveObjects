@@ -4,10 +4,15 @@ CANVAS_OBJECTS_IDS_GET = function(){
   CANVAS_OBJECTS_IDS++;
   return CANVAS_OBJECTS_IDS
 }
+var CANVAS_INTERVAL_FUNCTIONS = [];
+var CANVAS_INTERVAL = setInterval(function(){
+  for (var i = 0; i < CANVAS_INTERVAL_FUNCTIONS.length; i++) {
+    CANVAS_INTERVAL_FUNCTIONS[i]()
+  }
+},10);
+
 module.exports = {
   CanvasObjects: function(){
-
-
     co_self = this;
     co_self.id = CANVAS_OBJECTS_IDS_GET()
     co_self.gameType = "platform"; // plataform, fromAbove
@@ -368,13 +373,6 @@ module.exports = {
 
 
 
-    co_self.allForces = [];
-    co_self.allForcesInterval = setInterval(function(){
-      for (var i = 0; i < that.allForces.length; i++) {
-        that.allForces[i]()
-      }
-    },10);
-
     co_self.windsForcesIds = -1;
     co_self.windsForces = Array();
     co_self.windsForcesInterval = Array();
@@ -418,7 +416,7 @@ module.exports = {
 
     co_self.gravityForcesIds = -1;
     co_self.gravityForces = Array();
-    co_self.startGravity = function(l){
+    co_self.startGravity = function(global,l){
       that = this;
       that.gravityForcesIds++;
       g_obj = {};
@@ -433,10 +431,10 @@ module.exports = {
 
       that.gravityForcesInterval = function(){
         this.id = g_obj.id
-        this.layer = that.gravityForces[this.id].layer;
-        this.gravityForce = that.gravityForces[this.id].force;
+        this.layer = this.gravityForces[this.id].layer;
+        this.gravityForce = this.gravityForces[this.id].force;
 
-        this.g_objects = that.objectsByLayer[this.layer];
+        this.g_objects = this.objectsByLayer[this.layer];
 
         for (var i = 0; i < this.g_objects.length; i++) {
           if(this.g_objects[i].static == 0 ){
@@ -452,14 +450,14 @@ module.exports = {
         }
       }
 
-      that.allForces[that.allForces.length] = that.gravityForcesInterval
+      CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = that.gravityForcesInterval
 
       return g_obj;
     }
 
     co_self.XFORCESIds = -1;
     co_self.XFORCES = Array();
-    co_self.startXFORCES = function(l){
+    co_self.startXFORCES = function(global,l){
       that = this;
       that.XFORCESIds++;
       xf_obj = {};
@@ -471,8 +469,8 @@ module.exports = {
 
       that.XFORCESInterval = function(){
         this.id = xf_obj.id
-        this.layer = that.XFORCES[this.id].layer;
-        this.XForces_objects = that.objectsByLayer[this.layer];
+        this.layer = this.XFORCES[this.id].layer;
+        this.XForces_objects = this.objectsByLayer[this.layer];
 
         for (var i = 0; i < this.XForces_objects.length; i++) {
           if(this.XForces_objects[i].static == 0 ){
@@ -491,7 +489,7 @@ module.exports = {
 
       }
 
-      that.allForces[that.allForces.length] = that.XFORCESInterval
+      CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = that.XFORCESInterval
 
       return xf_obj;
 
