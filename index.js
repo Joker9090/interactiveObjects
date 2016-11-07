@@ -15,8 +15,7 @@ var CANVAS_INTERVAL = setInterval(function(){
 module.exports = {
   CanvasObjects: function(){
     co_self = this;
-    co_self.id = CANVAS_OBJECTS_IDS_GET()
-    console.log(co_self.id)
+    co_self.GlobalID = CANVAS_OBJECTS_IDS_GET()
     co_self.gameType = "platform"; // plataform, fromAbove
     co_self._mapsimageTotals = -1
     co_self.imgs = Array();
@@ -452,9 +451,9 @@ module.exports = {
         }
       }
       intervalObject = {
-        parameter: that,
+        parameter: co_self,
         interval: function(parameter){
-          console.log(parameter)
+          console.log(parameter.GlobalID)
         }
       }
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
@@ -498,7 +497,7 @@ module.exports = {
       intervalObject = {
         parameter: that,
         interval: function(parameter){
-          console.log(parameter)
+          console.log(parameter.GlobalID)
         }
       }
 
