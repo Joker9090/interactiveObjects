@@ -451,7 +451,7 @@ module.exports = {
         }
       }
       intervalObject = {
-        parameter: co_self,
+        parameter: this,
         forceID: g_obj.id,
         interval: that.gravityForcesInterval
       }
@@ -493,11 +493,11 @@ module.exports = {
         }
       }
       intervalObject = {
-        parameter: co_self,
+        parameter: this,
         forceID: xf_obj.id,
         interval: that.XFORCESInterval
       }
-      
+
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
 
       return xf_obj;
