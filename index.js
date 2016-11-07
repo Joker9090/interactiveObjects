@@ -1,8 +1,13 @@
 // var colors = require('colors');
+CANVAS_OBJECTS_IDS = -1;
+CANVAS_OBJECTS_IDS_GET() = function(){
+  CANVAS_OBJECTS_IDS++;
+  return CANVAS_OBJECTS_IDS
+}
 module.exports = {
   CanvasObjects: function(){
     co_self = this;
-    co_self.id++
+    co_self.id = CANVAS_OBJECTS_IDS_GET()
     co_self.gameType = "platform"; // plataform, fromAbove
     co_self._mapsimageTotals = -1
     co_self.imgs = Array();
