@@ -430,7 +430,8 @@ module.exports = {
       };
       that.gravityForces[g_obj.id] = g_obj;
 
-      that.gravityForcesInterval = function(parameter,id){
+      that.gravityForcesInterval = function(globalID,id){
+        parameter = CANVAS_OBJECTS[globalID]
         this.id = id
         this.layer = parameter.gravityForces[this.id].layer;
         this.gravityForce = parameter.gravityForces[this.id].force;
@@ -451,7 +452,7 @@ module.exports = {
         }
       }
       intervalObject = {
-        parameter: that,
+        GlobalID: co_self.GlobalID,
         forceID: g_obj.id,
         interval: that.gravityForcesInterval
       }
@@ -472,7 +473,8 @@ module.exports = {
 
       that.XFORCES[xf_obj.id] = xf_obj;
 
-      that.XFORCESInterval = function(parameter,id){
+      that.XFORCESInterval = function(globalID,id){
+        parameter = CANVAS_OBJECTS[globalID]
         this.id = id
         this.layer = parameter.XFORCES[this.id].layer;
         this.XForces_objects = parameter.objectsByLayer[this.layer];
@@ -493,7 +495,7 @@ module.exports = {
         }
       }
       intervalObject = {
-        parameter: that,
+        GlobalID: co_self.GlobalID,
         forceID: xf_obj.id,
         interval: that.XFORCESInterval
       }
