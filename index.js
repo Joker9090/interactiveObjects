@@ -1,4 +1,5 @@
 // var colors = require('colors');
+var CANVAS_OBJECTS = []
 var CANVAS_OBJECTS_IDS = -1;
 CANVAS_OBJECTS_IDS_GET = function(){
   CANVAS_OBJECTS_IDS++;
@@ -7,7 +8,7 @@ CANVAS_OBJECTS_IDS_GET = function(){
 var CANVAS_INTERVAL_FUNCTIONS = [];
 var CANVAS_INTERVAL = setInterval(function(){
   for (var i = 0; i < CANVAS_INTERVAL_FUNCTIONS.length; i++) {
-    CANVAS_INTERVAL_FUNCTIONS[i]()
+    CANVAS_INTERVAL_FUNCTIONS[i].function(CANVAS_INTERVAL_FUNCTIONS[i].parameter)
   }
 },10);
 
@@ -450,10 +451,13 @@ module.exports = {
           }
         }
       }
-      function testFunction(){
-        console.log("Gravity "+that.id)
+      intervalObject = {
+        parameter: that,
+        interval: function(parameter){
+          console.log("gravity "+parameter.id)
+        }
       }
-      CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = testFunction
+      CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
 
       return g_obj;
     }
@@ -491,12 +495,16 @@ module.exports = {
 
         }
       }
-      function testFunction(){
-        console.log("xForce "+that.id)
+      intervalObject = {
+        parameter: that,
+        interval: function(parameter){
+          console.log("xForce "+parameter.id)
+        }
       }
 
 
-      CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = testFunction
+
+      CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
 
       return xf_obj;
 
@@ -560,7 +568,7 @@ module.exports = {
       return extraxf_obj;
 
     }
-
+    CANVAS_OBJECTS[CANVAS_OBJECTS.length] = co_self;
     return co_self;
   }
 }
