@@ -450,7 +450,8 @@ module.exports = {
           }
         }
       }
-      that.allForces[that.allForces.length] = gravityForcesInterval
+      
+      that.allForces[that.allForces.length] = that.gravityForcesInterval
 
       return g_obj;
     }
