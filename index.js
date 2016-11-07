@@ -1,6 +1,6 @@
 // var colors = require('colors');
-CANVAS_OBJECTS_IDS = -1;
-CANVAS_OBJECTS_IDS_GET() = function(){
+var CANVAS_OBJECTS_IDS = -1;
+CANVAS_OBJECTS_IDS_GET = function(){
   CANVAS_OBJECTS_IDS++;
   return CANVAS_OBJECTS_IDS
 }
