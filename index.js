@@ -452,7 +452,7 @@ module.exports = {
         }
       }
       intervalObject = {
-        GlobalID: co_self.GlobalID,
+        GlobalID: that.GlobalID,
         forceID: g_obj.id,
         interval: function(g,f){
           console.log(g+" "+f)
@@ -497,7 +497,7 @@ module.exports = {
         }
       }
       intervalObject = {
-        GlobalID: co_self.GlobalID,
+        GlobalID: that.GlobalID,
         forceID: xf_obj.id,
         interval: function(g,f){
           console.log(g+" "+f)
