@@ -451,7 +451,7 @@ module.exports = {
         }
       }
       intervalObject = {
-        parameter: this,
+        parameter: that,
         forceID: g_obj.id,
         interval: that.gravityForcesInterval
       }
@@ -493,7 +493,7 @@ module.exports = {
         }
       }
       intervalObject = {
-        parameter: this,
+        parameter: that,
         forceID: xf_obj.id,
         interval: that.XFORCESInterval
       }
