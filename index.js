@@ -15,8 +15,8 @@ module.exports = {
     co_self.focusedObject = {};
     co_self.getAllObjects = function(){
       newObjectList = Array();
-      for (var i = 0; i < co_self.objectsByLayer.length; i++) {
-        newObjectList = newObjectList.concat(co_self.objectsByLayer[i])
+      for (var i = 0; i < this.objectsByLayer.length; i++) {
+        newObjectList = newObjectList.concat(this.objectsByLayer[i])
       }
       return newObjectList;
      }
@@ -126,7 +126,8 @@ module.exports = {
     }
 
     co_self.createObject = function(type){
-      co_self._mapsimageTotals++;
+      that = this;
+      that._mapsimageTotals++;
       _object = {
         setPos: function(x,y){
           this.posX = x;
@@ -134,7 +135,7 @@ module.exports = {
         },
         setPosX : function(x){
           if(this.static == 1) return false;
-          if(co_self.checkHorizontalColision(this,x)){
+          if(that.checkHorizontalColision(this,x)){
             this.posX = x;
             return true
           }
@@ -142,7 +143,7 @@ module.exports = {
         },
         setPosY : function(y){
           if(this.static == 1) return false;
-          if(co_self.checkVerticalColision(this,y)){
+          if(that.checkVerticalColision(this,y)){
             this.posY = y;
             return true;
           }
@@ -172,23 +173,23 @@ module.exports = {
         static: 0,
         canRemove: 0,
         remove: "",
-        id: co_self._mapsimageTotals,
+        id: that._mapsimageTotals,
         img: "",
         imgSrc: "",
         setImgSrc : function(imgUrl,fn){ this.imgSrc = imgUrl; this.loadImg(fn); },
         layer: 0,
         loadImg : function(fn){
-          co_self.imgs[this.id] = new Image();
-          co_self.imgs[this.id].onload = function(id){
-            co_self.getObjectById(id).img = co_self.imgs[id];
-            if(typeof fn == "function") fn(co_self.getObjectById(id));
+          that.imgs[this.id] = new Image();
+          that.imgs[this.id].onload = function(id){
+            that.getObjectById(id).img = that.imgs[id];
+            if(typeof fn == "function") fn(that.getObjectById(id));
           }(this.id)
-          co_self.imgs[this.id].src = this.imgSrc;
+          that.imgs[this.id].src = this.imgSrc;
         },
         setLayer: function(v){
-          if(typeof co_self.objectsByLayer[v] == "undefined") co_self.objectsByLayer[v] = Array();
-          co_self.objectsByLayer[v][co_self.objectsByLayer[v].length] = this;
-          co_self.removeFromLayers(this.layer,this.id);
+          if(typeof that.objectsByLayer[v] == "undefined") that.objectsByLayer[v] = Array();
+          that.objectsByLayer[v][that.objectsByLayer[v].length] = this;
+          that.removeFromLayers(this.layer,this.id);
           this.layer = v;
         },
         sprite: "",
@@ -199,11 +200,11 @@ module.exports = {
         posY: 0,
         drawPosX: function(){
           if(this.type == "mapObjectNotFocused") return this.posX
-          return (co_self.focusXEnabled ) ? this.posX - co_self.focusedObject.posX + co_self.focusedObject.startPosX : this.posX;
+          return (that.focusXEnabled ) ? this.posX - that.focusedObject.posX + that.focusedObject.startPosX : this.posX;
         },
         drawPosY: function(){
           if(this.type == "mapObjectNotFocused") return this.posY
-          return  (co_self.focusYEnabled) ? (this.posY - co_self.focusedObject.posY + co_self.focusedObject.startPosY) : this.posY
+          return  (that.focusYEnabled) ? (this.posY - that.focusedObject.posY + that.focusedObject.startPosY) : this.posY
         },
         focusPosX: 0,
         focusPosY: 0,
@@ -215,12 +216,12 @@ module.exports = {
         endSpriteY: 0
       }
 
-      _object = (typeof type == "object") ? co_self.mergeObjects(type,_object) : _object;
+      _object = (typeof type == "object") ? that.mergeObjects(type,_object) : _object;
 
-      if(typeof co_self.objectsByLayer[_object.layer] == "undefined"){
-        co_self.objectsByLayer[_object.layer] = Array();
+      if(typeof that.objectsByLayer[_object.layer] == "undefined"){
+        that.objectsByLayer[_object.layer] = Array();
       }
-      co_self.objectsByLayer[_object.layer][co_self.objectsByLayer[_object.layer].length] = _object;
+      that.objectsByLayer[_object.layer][that.objectsByLayer[_object.layer].length] = _object;
 
 
       // _object.startPosY = _object.posY
