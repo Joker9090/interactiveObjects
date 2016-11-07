@@ -449,8 +449,10 @@ module.exports = {
           }
         }
       }
-
-      CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = that.gravityForcesInterval
+      function testFunction(){
+        console.log("Gravity "+that.id)
+      }
+      CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = testFunction
 
       return g_obj;
     }
@@ -487,10 +489,13 @@ module.exports = {
 
 
         }
-
+      }
+      function testFunction(){
+        console.log("xForce "+that.id)
       }
 
-      CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = that.XFORCESInterval
+
+      CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = testFunction
 
       return xf_obj;
 
