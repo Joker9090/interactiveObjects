@@ -6,6 +6,8 @@ CANVAS_OBJECTS_IDS_GET = function(){
 }
 module.exports = {
   CanvasObjects: function(){
+
+
     co_self = this;
     co_self.id = CANVAS_OBJECTS_IDS_GET()
     co_self.gameType = "platform"; // plataform, fromAbove
@@ -365,6 +367,12 @@ module.exports = {
     };
 
 
+
+    co_self.allForces = [];
+    co_self.allForcesInterval = setInterval(function(){
+      console.log(allForces)
+    },10);
+
     co_self.windsForcesIds = -1;
     co_self.windsForces = Array();
     co_self.windsForcesInterval = Array();
@@ -422,11 +430,12 @@ module.exports = {
       };
       that.gravityForces[g_obj.id] = g_obj;
 
-      that.gravityForcesInterval = setInterval(function(id){
-        layer = that.gravityForces[id].layer;
-        gravityForce = that.gravityForces[id].force;
+      that.gravityForcesInterval = function(){
+        this.id = g_obj.id
+        this.layer = that.gravityForces[id].layer;
+        this.gravityForce = that.gravityForces[id].force;
 
-        g_objects = that.objectsByLayer[layer];
+        this.g_objects = that.objectsByLayer[layer];
 
         for (var i = 0; i < g_objects.length; i++) {
           if(g_objects[i].static == 0 ){
@@ -440,7 +449,8 @@ module.exports = {
             }
           }
         }
-      },10,(g_obj.id));
+      }
+      that.allForces[that.allForces.length] = gravityForcesInterval
 
       return g_obj;
     }
