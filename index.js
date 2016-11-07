@@ -370,7 +370,9 @@ module.exports = {
 
     co_self.allForces = [];
     co_self.allForcesInterval = setInterval(function(){
-      console.log(that.allForces)
+      for (var i = 0; i < that.allForces.length; i++) {
+        that.allForces[i]()
+      }
     },10);
 
     co_self.windsForcesIds = -1;
@@ -450,7 +452,7 @@ module.exports = {
           }
         }
       }
-      
+
       that.allForces[that.allForces.length] = that.gravityForcesInterval
 
       return g_obj;
