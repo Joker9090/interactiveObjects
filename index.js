@@ -430,12 +430,12 @@ module.exports = {
       };
       that.gravityForces[g_obj.id] = g_obj;
 
-      that.gravityForcesInterval = function(){
-        this.id = g_obj.id
-        this.layer = that.gravityForces[this.id].layer;
-        this.gravityForce = that.gravityForces[this.id].force;
+      that.gravityForcesInterval = function(parameter,id){
+        this.id = id
+        this.layer = parameter.gravityForces[this.id].layer;
+        this.gravityForce = parameter.gravityForces[this.id].force;
 
-        this.g_objects = that.objectsByLayer[this.layer];
+        this.g_objects = parameter.objectsByLayer[this.layer];
 
         for (var i = 0; i < this.g_objects.length; i++) {
           if(this.g_objects[i].static == 0 ){
@@ -452,9 +452,8 @@ module.exports = {
       }
       intervalObject = {
         parameter: co_self,
-        interval: function(parameter){
-          console.log(parameter.GlobalID)
-        }
+        forceID: g_obj.id,
+        interval: that.gravityForcesInterval
       }
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
 
@@ -473,11 +472,10 @@ module.exports = {
 
       that.XFORCES[xf_obj.id] = xf_obj;
 
-      that.XFORCESInterval = function(){
-        this.id = xf_obj.id
-        this.layer = that.XFORCES[this.id].layer;
-        this.XForces_objects = that.objectsByLayer[this.layer];
-        console.log(that.objectsByLayer[this.layer])
+      that.XFORCESInterval = function(parameter,id){
+        this.id = id
+        this.layer = parameter.XFORCES[this.id].layer;
+        this.XForces_objects = parameter.objectsByLayer[this.layer];
 
         for (var i = 0; i < this.XForces_objects.length; i++) {
           if(this.XForces_objects[i].static == 0 ){
@@ -495,14 +493,11 @@ module.exports = {
         }
       }
       intervalObject = {
-        parameter: that,
-        interval: function(parameter){
-          console.log(parameter.GlobalID)
-        }
+        parameter: co_self,
+        forceID: xf_obj.id,
+        interval: that.XFORCESInterval
       }
-
-
-
+      
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
 
       return xf_obj;
