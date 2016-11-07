@@ -432,9 +432,9 @@ module.exports = {
       that.gravityForcesInterval = function(){
         this.id = g_obj.id
         this.layer = that.gravityForces[this.id].layer;
-        this.gravityForce = this.gravityForces[this.id].force;
+        this.gravityForce = that.gravityForces[this.id].force;
 
-        this.g_objects = this.objectsByLayer[this.layer];
+        this.g_objects = that.objectsByLayer[this.layer];
 
         for (var i = 0; i < this.g_objects.length; i++) {
           if(this.g_objects[i].static == 0 ){
@@ -469,8 +469,8 @@ module.exports = {
 
       that.XFORCESInterval = function(){
         this.id = xf_obj.id
-        this.layer = this.XFORCES[this.id].layer;
-        this.XForces_objects = this.objectsByLayer[this.layer];
+        this.layer = that.XFORCES[this.id].layer;
+        this.XForces_objects = that.objectsByLayer[this.layer];
 
         for (var i = 0; i < this.XForces_objects.length; i++) {
           if(this.XForces_objects[i].static == 0 ){
