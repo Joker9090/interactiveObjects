@@ -370,7 +370,6 @@ module.exports = {
 
     co_self.allForces = [];
     co_self.allForcesInterval = setInterval(function(){
-      console.log(that.id)
       for (var i = 0; i < that.allForces.length; i++) {
         that.allForces[i]()
       }
