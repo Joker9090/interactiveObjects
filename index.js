@@ -418,7 +418,6 @@ module.exports = {
 
     co_self.gravityForcesIds = -1;
     co_self.gravityForces = Array();
-    co_self.gravityForcesInterval = Array();
     co_self.startGravity = function(l){
       that = this;
       that.gravityForcesIds++;
@@ -460,7 +459,6 @@ module.exports = {
 
     co_self.XFORCESIds = -1;
     co_self.XFORCES = Array();
-    co_self.XFORCESInterval = Array();
     co_self.startXFORCES = function(l){
       that = this;
       that.XFORCESIds++;
@@ -471,28 +469,29 @@ module.exports = {
 
       that.XFORCES[xf_obj.id] = xf_obj;
 
-      that.XFORCESInterval[xf_obj.id] = setInterval(function(id){
-        layer = that.XFORCES[id].layer;
-        XForces_objects = that.objectsByLayer[layer];
-        for (var i = 0; i < XForces_objects.length; i++) {
-          // if(XForces_objects[i].X_Force != 0 && g_objects[i].Y_Force > 0){
-          //   XForces_objects[i].setPosX(XForces_objects[i].posX + XForces_objects[i].X_Force)
-          // }
-          if(XForces_objects[i].static == 0 ){
-            newX =  XForces_objects[i].posX+XForces_objects[i].X_Force
-            if(XForces_objects[i].X_Force != 0 && XForces_objects[i].X_Force > 0){
+      that.XFORCESInterval = function(){
+        this.id = xf_obj.id
+        this.layer = that.XFORCES[this.id].layer;
+        this.XForces_objects = that.objectsByLayer[this.layer];
+
+        for (var i = 0; i < this.XForces_objects.length; i++) {
+          if(this.XForces_objects[i].static == 0 ){
+            newX =  this.XForces_objects[i].posX+this.XForces_objects[i].X_Force
+            if(this.XForces_objects[i].X_Force != 0 && this.XForces_objects[i].X_Force > 0){
               //RIGHT
-              if(XForces_objects[i].setPosX(newX)) XForces_objects[i].X_Force = (XForces_objects[i].X_Force + (XForces_objects[i].friction*(-1)/100)  )  ;
-            }else if(XForces_objects[i].X_Force != 0 && XForces_objects[i].X_Force < 0){
+              if(this.XForces_objects[i].setPosX(newX)) this.XForces_objects[i].X_Force = (this.XForces_objects[i].X_Force + (this.XForces_objects[i].friction*(-1)/100)  )  ;
+            }else if(this.XForces_objects[i].X_Force != 0 && this.XForces_objects[i].X_Force < 0){
               //LEFT
-              if(XForces_objects[i].setPosX(newX)) XForces_objects[i].X_Force = (XForces_objects[i].X_Force + (XForces_objects[i].friction/100) ) ;
+              if(this.XForces_objects[i].setPosX(newX)) this.XForces_objects[i].X_Force = (this.XForces_objects[i].X_Force + (this.XForces_objects[i].friction/100) ) ;
             }
           }
 
 
         }
 
-      },10,(xf_obj.id))
+      }
+
+      that.allForces[that.allForces.length] = that.XFORCESInterval
 
       return xf_obj;
 
