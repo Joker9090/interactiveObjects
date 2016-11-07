@@ -8,7 +8,6 @@ CANVAS_OBJECTS_IDS_GET = function(){
 var CANVAS_INTERVAL_FUNCTIONS = [];
 var CANVAS_INTERVAL = setInterval(function(){
   for (var i = 0; i < CANVAS_INTERVAL_FUNCTIONS.length; i++) {
-    console.log(CANVAS_INTERVAL_FUNCTIONS.length)
     CANVAS_INTERVAL_FUNCTIONS[i].interval(CANVAS_INTERVAL_FUNCTIONS[i].parameter,CANVAS_INTERVAL_FUNCTIONS[i].forceID)
   }
 },1000);
@@ -432,6 +431,7 @@ module.exports = {
       that.gravityForces[g_obj.id] = g_obj;
 
       that.gravityForcesInterval = function(parameter,id){
+        console.log(parameter)
         this.id = id
         this.layer = parameter.gravityForces[this.id].layer;
         this.gravityForce = parameter.gravityForces[this.id].force;
