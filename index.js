@@ -8,6 +8,7 @@ CANVAS_OBJECTS_IDS_GET = function(){
 var CANVAS_INTERVAL_FUNCTIONS = [];
 var CANVAS_INTERVAL = setInterval(function(){
   for (var i = 0; i < CANVAS_INTERVAL_FUNCTIONS.length; i++) {
+    console.log(CANVAS_INTERVAL_FUNCTIONS.length)
     CANVAS_INTERVAL_FUNCTIONS[i].interval(CANVAS_INTERVAL_FUNCTIONS[i].GlobalID,CANVAS_INTERVAL_FUNCTIONS[i].forceID)
   }
 },1000);
