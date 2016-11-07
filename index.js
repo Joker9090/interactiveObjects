@@ -10,7 +10,7 @@ var CANVAS_INTERVAL = setInterval(function(){
   for (var i = 0; i < CANVAS_INTERVAL_FUNCTIONS.length; i++) {
     CANVAS_INTERVAL_FUNCTIONS[i].interval(CANVAS_INTERVAL_FUNCTIONS[i].parameter)
   }
-},10);
+},1000);
 
 module.exports = {
   CanvasObjects: function(){
@@ -454,7 +454,7 @@ module.exports = {
       intervalObject = {
         parameter: that,
         interval: function(parameter){
-          console.log("gravity "+parameter.id)
+          console.log(parameter)
         }
       }
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
@@ -498,7 +498,7 @@ module.exports = {
       intervalObject = {
         parameter: that,
         interval: function(parameter){
-          console.log("xForce "+parameter.id)
+          console.log(parameter)
         }
       }
 
