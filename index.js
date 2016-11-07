@@ -15,6 +15,7 @@ module.exports = {
   CanvasObjects: function(){
     co_self = this;
     co_self.id = CANVAS_OBJECTS_IDS_GET()
+    console.log(co_self.id)
     co_self.gameType = "platform"; // plataform, fromAbove
     co_self._mapsimageTotals = -1
     co_self.imgs = Array();
