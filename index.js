@@ -453,8 +453,10 @@ module.exports = {
       }
       intervalObject = {
         GlobalID: co_self.GlobalID,
-        forceID: g_obj.id,
-        interval: that.gravityForcesInterval
+        forceID: xf_obj.id,
+        interval: function(g,f){
+          console.log(g+" "+f)
+        }
       }
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
 
@@ -497,7 +499,9 @@ module.exports = {
       intervalObject = {
         GlobalID: co_self.GlobalID,
         forceID: xf_obj.id,
-        interval: that.XFORCESInterval
+        interval: function(g,f){
+          console.log(g+" "+f)
+        }
       }
 
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
