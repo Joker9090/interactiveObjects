@@ -1,5 +1,5 @@
 // var colors = require('colors');
-var CANVAS_OBJECTS = []
+
 var CANVAS_OBJECTS_IDS = -1;
 CANVAS_OBJECTS_IDS_GET = function(){
   CANVAS_OBJECTS_IDS++;
@@ -431,7 +431,6 @@ module.exports = {
       that.gravityForces[g_obj.id] = g_obj;
 
       that.gravityForcesInterval = function(parameter,id){
-        console.log(parameter)
         this.id = id
         this.layer = parameter.gravityForces[this.id].layer;
         this.gravityForce = parameter.gravityForces[this.id].force;
@@ -565,7 +564,6 @@ module.exports = {
       return extraxf_obj;
 
     }
-    CANVAS_OBJECTS[CANVAS_OBJECTS.length] = co_self;
     return co_self;
   }
 }
