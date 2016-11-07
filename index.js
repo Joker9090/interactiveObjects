@@ -471,6 +471,7 @@ module.exports = {
         this.id = xf_obj.id
         this.layer = that.XFORCES[this.id].layer;
         this.XForces_objects = that.objectsByLayer[this.layer];
+        console.log(that.objectsByLayer[this.layer])
 
         for (var i = 0; i < this.XForces_objects.length; i++) {
           if(this.XForces_objects[i].static == 0 ){
