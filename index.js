@@ -9,7 +9,7 @@ var CANVAS_INTERVAL_FUNCTIONS = [];
 var CANVAS_INTERVAL = setInterval(function(){
   for (var i = 0; i < CANVAS_INTERVAL_FUNCTIONS.length; i++) {
     console.log(CANVAS_INTERVAL_FUNCTIONS.length)
-    CANVAS_INTERVAL_FUNCTIONS[i].interval(CANVAS_INTERVAL_FUNCTIONS[i].GlobalID,CANVAS_INTERVAL_FUNCTIONS[i].forceID)
+    CANVAS_INTERVAL_FUNCTIONS[i].interval(CANVAS_INTERVAL_FUNCTIONS[i].parameter,CANVAS_INTERVAL_FUNCTIONS[i].forceID)
   }
 },1000);
 
@@ -431,8 +431,7 @@ module.exports = {
       };
       that.gravityForces[g_obj.id] = g_obj;
 
-      that.gravityForcesInterval = function(globalID,id){
-        parameter = CANVAS_OBJECTS[globalID]
+      that.gravityForcesInterval = function(parameter,id){
         this.id = id
         this.layer = parameter.gravityForces[this.id].layer;
         this.gravityForce = parameter.gravityForces[this.id].force;
@@ -452,13 +451,13 @@ module.exports = {
           }
         }
       }
+
       intervalObject = {
-        GlobalID: that.GlobalID,
+        parameter: that,
         forceID: g_obj.id,
-        interval: function(g,f){
-          console.log(g+" "+f)
-        }
+        interval: that.gravityForcesInterval
       }
+
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
 
       return g_obj;
@@ -476,8 +475,7 @@ module.exports = {
 
       that.XFORCES[xf_obj.id] = xf_obj;
 
-      that.XFORCESInterval = function(globalID,id){
-        parameter = CANVAS_OBJECTS[globalID]
+      that.XFORCESInterval = function(parameter,id){
         this.id = id
         this.layer = parameter.XFORCES[this.id].layer;
         this.XForces_objects = parameter.objectsByLayer[this.layer];
@@ -498,11 +496,9 @@ module.exports = {
         }
       }
       intervalObject = {
-        GlobalID: that.GlobalID,
+        parameter: that,
         forceID: xf_obj.id,
-        interval: function(g,f){
-          console.log(g+" "+f)
-        }
+        interval: that.XFORCESInterval
       }
 
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
