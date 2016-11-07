@@ -453,7 +453,7 @@ module.exports = {
       }
       intervalObject = {
         GlobalID: co_self.GlobalID,
-        forceID: xf_obj.id,
+        forceID: g_obj.id,
         interval: function(g,f){
           console.log(g+" "+f)
         }
