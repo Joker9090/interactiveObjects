@@ -439,15 +439,15 @@ module.exports = {
 
         this.g_objects = that.objectsByLayer[this.layer];
 
-        for (var i = 0; i < g_objects.length; i++) {
-          if(g_objects[i].static == 0 ){
-            newY =  g_objects[i].posY+g_objects[i].Y_Force
-            if(g_objects[i].Y_Force != 0 && g_objects[i].Y_Force > 0){
+        for (var i = 0; i < this.g_objects.length; i++) {
+          if(this.g_objects[i].static == 0 ){
+            newY =  this.g_objects[i].posY+this.g_objects[i].Y_Force
+            if(this.g_objects[i].Y_Force != 0 && this.g_objects[i].Y_Force > 0){
               //JUMP
-              if(g_objects[i].setPosY(newY)) g_objects[i].Y_Force = (g_objects[i].Y_Force + gravityForce) / ((g_objects[i].mass > 0) ? g_objects[i].mass : 1) ;
+              if(this.g_objects[i].setPosY(newY)) this.g_objects[i].Y_Force = (this.g_objects[i].Y_Force + gravityForce) / ((this.g_objects[i].mass > 0) ? this.g_objects[i].mass : 1) ;
             }else {
               //FALLING
-              if(g_objects[i].setPosY(newY)) g_objects[i].Y_Force = (g_objects[i].Y_Force + gravityForce) / ((g_objects[i].wind_resistence > 0) ? g_objects[i].wind_resistence : 1) ;
+              if(this.g_objects[i].setPosY(newY)) this.g_objects[i].Y_Force = (this.g_objects[i].Y_Force + gravityForce) / ((this.g_objects[i].wind_resistence > 0) ? this.g_objects[i].wind_resistence : 1) ;
             }
           }
         }
