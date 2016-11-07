@@ -417,7 +417,7 @@ module.exports = {
 
     co_self.gravityForcesIds = -1;
     co_self.gravityForces = Array();
-    co_self.startGravity = function(global,l){
+    co_self.startGravity = function(l){
       that = this;
       that.gravityForcesIds++;
       g_obj = {};
@@ -465,7 +465,7 @@ module.exports = {
 
     co_self.XFORCESIds = -1;
     co_self.XFORCES = Array();
-    co_self.startXFORCES = function(global,l){
+    co_self.startXFORCES = function(l){
       that = this;
       that.XFORCESIds++;
       xf_obj = {};
