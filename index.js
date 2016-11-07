@@ -431,7 +431,7 @@ module.exports = {
 
       that.gravityForcesInterval = function(){
         this.id = g_obj.id
-        this.layer = this.gravityForces[this.id].layer;
+        this.layer = that.gravityForces[this.id].layer;
         this.gravityForce = this.gravityForces[this.id].force;
 
         this.g_objects = this.objectsByLayer[this.layer];
