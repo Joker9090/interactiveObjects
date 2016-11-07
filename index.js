@@ -370,7 +370,7 @@ module.exports = {
 
     co_self.allForces = [];
     co_self.allForcesInterval = setInterval(function(){
-      console.log(allForces)
+      console.log(that.allForces)
     },10);
 
     co_self.windsForcesIds = -1;
