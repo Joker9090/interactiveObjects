@@ -29,8 +29,8 @@ module.exports = {
     co_self.focusedObject = {};
     co_self.getAllObjects = function(){
       newObjectList = Array();
-      for (var i = 0; i < this.objectsByLayer.length; i++) {
-        newObjectList = newObjectList.concat(this.objectsByLayer[i])
+      for (var i = 0; i < co_self.objectsByLayer.length; i++) {
+        newObjectList = newObjectList.concat(co_self.objectsByLayer[i])
       }
       return newObjectList;
      }
