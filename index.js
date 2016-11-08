@@ -234,10 +234,10 @@ module.exports = {
 
       _object = (typeof type == "object") ? that.mergeObjects(type,_object) : _object;
 
-      if(typeof that.objectsByLayer[_object.layer] == "undefined"){
-        that.objectsByLayer[_object.layer] = Array();
+      if(typeof co_self.objectsByLayer[_object.layer] == "undefined"){
+        co_self.objectsByLayer[_object.layer] = Array();
       }
-      that.objectsByLayer[_object.layer][that.objectsByLayer[_object.layer].length] = _object;
+      co_self.objectsByLayer[_object.layer][co_self.objectsByLayer[_object.layer].length] = _object;
 
 
       // _object.startPosY = _object.posY
