@@ -313,6 +313,7 @@ module.exports = {
       for (var i = 0; i < V_objs.length; i++) {
         if((V_objs[i].id != Obj.id) && V_objs[i].solid > 0){
           if(that.checkPos(V_objs[i],Obj,Obj.posX,y) == false) {
+              console.log(Obj.name+" "+V_objs[i].name)
               if (Obj.posY > y) {
                 Obj.posY = V_objs[i].posY+Obj.height
                 if(typeof Obj.YContactFunction == "function") Obj.YContactFunction(V_objs[i],"down")
