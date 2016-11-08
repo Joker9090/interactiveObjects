@@ -1,6 +1,6 @@
 
 module.exports = {
-  CanvasObjects = function(){
+  CanvasObjects : function(){
     console.log("[COM] Create CanvasObject");
     GID = -1;
     getID = function(){
