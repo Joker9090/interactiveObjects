@@ -29,23 +29,23 @@ module.exports = {
     co_self.focusedObject = {};
     co_self.getAllObjects = function(){
       newObjectList = Array();
-      for (var i = 0; i < co_self.objectsByLayer.length; i++) {
-        newObjectList = newObjectList.concat(co_self.objectsByLayer[i])
+      for (var i = 0; i < this.objectsByLayer.length; i++) {
+        newObjectList = newObjectList.concat(this.objectsByLayer[i])
       }
       return newObjectList;
      }
 
     co_self.createMap = function(name){
-
-      co_self._mapsimageTotals++;
+      that = this;
+      that._mapsimageTotals++;
       cm_obj = {
-        id : co_self._mapsimageTotals,
+        id : that._mapsimageTotals,
         type : "map",
         layer: 0,
         setLayer: function(v){
-          if(typeof co_self.objectsByLayer[v] == "undefined") co_self.objectsByLayer[v] = Array();
-          co_self.objectsByLayer[v][co_self.objectsByLayer[v].length] = this;
-          co_self.removeFromLayers(this.layer,this.id);
+          if(typeof that.objectsByLayer[v] == "undefined") that.objectsByLayer[v] = Array();
+          that.objectsByLayer[v][that.objectsByLayer[v].length] = this;
+          that.removeFromLayers(this.layer,this.id);
           this.layer = v;
         },
         velocityX:0,
@@ -77,7 +77,7 @@ module.exports = {
           this.posY = y;
         },
         setPosX : function(x){
-          if(co_self.checkHorizontalColision(this,x)){
+          if(that.checkHorizontalColision(this,x)){
             this.posX = x;
             return true
           }
@@ -87,7 +87,7 @@ module.exports = {
         posY : 0,
         focusPosY : 0,
         setPosY : function(y){
-          if(co_self.checkVerticalColision(this,y)){
+          if(that.checkVerticalColision(this,y)){
             this.posY = y;
             return true;
           }
@@ -115,27 +115,27 @@ module.exports = {
         img: "",
         imgSrc: "",
         loadImg : function(fn){
-          co_self.imgs[this.id] = new Image();
-          co_self.imgs[this.id].onload = function(id){
-            co_self.getObjectById(id).img = co_self.imgs[id];
-            if(typeof fn == "function") fn(co_self.getObjectById(id));
+          that.imgs[this.id] = new Image();
+          that.imgs[this.id].onload = function(id){
+            that.getObjectById(id).img = that.imgs[id];
+            if(typeof fn == "function") fn(that.getObjectById(id));
           }(this.id)
-          co_self.imgs[this.id].src = this.imgSrc;
+          that.imgs[this.id].src = this.imgSrc;
         },
         setImgSrc : function(imgUrl,fn){ this.imgSrc = imgUrl; this.loadImg(fn); },
       };
-      cm_obj = (typeof name == "object") ? co_self.mergeObjects(name,cm_obj) : cm_obj;
-      if(typeof co_self.objectsByLayer[cm_obj.layer] == "undefined"){
-        co_self.objectsByLayer[cm_obj.layer] = Array();
+      cm_obj = (typeof name == "object") ? that.mergeObjects(name,cm_obj) : cm_obj;
+      if(typeof that.objectsByLayer[cm_obj.layer] == "undefined"){
+        that.objectsByLayer[cm_obj.layer] = Array();
       }
-      co_self.objectsByLayer[cm_obj.layer][co_self.objectsByLayer[cm_obj.layer].length] = cm_obj;
+      that.objectsByLayer[cm_obj.layer][that.objectsByLayer[cm_obj.layer].length] = cm_obj;
 
       return cm_obj;
     }
 
     co_self.getObjectById = function(id){
-
-      o = co_self.getAllObjects();
+      that = this;
+      o = that.getAllObjects();
       for (var i = 0; i < o.length; i++) {
         if((o[i] != undefined ) && o[i].id == id) return o[i]
       }
@@ -143,8 +143,8 @@ module.exports = {
     }
 
     co_self.createObject = function(type){
-
-      co_self._mapsimageTotals++;
+      that = this;
+      that._mapsimageTotals++;
       _object = {
         setPos: function(x,y){
           this.posX = x;
@@ -152,7 +152,7 @@ module.exports = {
         },
         setPosX : function(x){
           if(this.static == 1) return false;
-          if(co_self.checkHorizontalColision(this,x)){
+          if(that.checkHorizontalColision(this,x)){
             this.posX = x;
             return true
           }
@@ -160,7 +160,7 @@ module.exports = {
         },
         setPosY : function(y){
           if(this.static == 1) return false;
-          if(co_self.checkVerticalColision(this,y)){
+          if(that.checkVerticalColision(this,y)){
             this.posY = y;
             return true;
           }
@@ -191,23 +191,23 @@ module.exports = {
         static: 0,
         canRemove: 0,
         remove: "",
-        id: co_self._mapsimageTotals,
+        id: that._mapsimageTotals,
         img: "",
         imgSrc: "",
         setImgSrc : function(imgUrl,fn){ this.imgSrc = imgUrl; this.loadImg(fn); },
         layer: 0,
         loadImg : function(fn){
-          co_self.imgs[this.id] = new Image();
-          co_self.imgs[this.id].onload = function(id){
-            co_self.getObjectById(id).img = co_self.imgs[id];
-            if(typeof fn == "function") fn(co_self.getObjectById(id));
+          that.imgs[this.id] = new Image();
+          that.imgs[this.id].onload = function(id){
+            that.getObjectById(id).img = that.imgs[id];
+            if(typeof fn == "function") fn(that.getObjectById(id));
           }(this.id)
-          co_self.imgs[this.id].src = this.imgSrc;
+          that.imgs[this.id].src = this.imgSrc;
         },
         setLayer: function(v){
-          if(typeof co_self.objectsByLayer[v] == "undefined") co_self.objectsByLayer[v] = Array();
-          co_self.objectsByLayer[v][co_self.objectsByLayer[v].length] = this;
-          co_self.removeFromLayers(this.layer,this.id);
+          if(typeof that.objectsByLayer[v] == "undefined") that.objectsByLayer[v] = Array();
+          that.objectsByLayer[v][that.objectsByLayer[v].length] = this;
+          that.removeFromLayers(this.layer,this.id);
           this.layer = v;
         },
         sprite: "",
@@ -218,11 +218,11 @@ module.exports = {
         posY: 0,
         drawPosX: function(){
           if(this.type == "mapObjectNotFocused") return this.posX
-          return (co_self.focusXEnabled ) ? this.posX - co_self.focusedObject.posX + co_self.focusedObject.startPosX : this.posX;
+          return (that.focusXEnabled ) ? this.posX - that.focusedObject.posX + that.focusedObject.startPosX : this.posX;
         },
         drawPosY: function(){
           if(this.type == "mapObjectNotFocused") return this.posY
-          return  (co_self.focusYEnabled) ? (this.posY - co_self.focusedObject.posY + co_self.focusedObject.startPosY) : this.posY
+          return  (that.focusYEnabled) ? (this.posY - that.focusedObject.posY + that.focusedObject.startPosY) : this.posY
         },
         focusPosX: 0,
         focusPosY: 0,
@@ -234,12 +234,12 @@ module.exports = {
         endSpriteY: 0
       }
 
-      _object = (typeof type == "object") ? co_self.mergeObjects(type,_object) : _object;
+      _object = (typeof type == "object") ? that.mergeObjects(type,_object) : _object;
 
-      if(typeof co_self.objectsByLayer[_object.layer] == "undefined"){
-        co_self.objectsByLayer[_object.layer] = Array();
+      if(typeof that.objectsByLayer[_object.layer] == "undefined"){
+        that.objectsByLayer[_object.layer] = Array();
       }
-      co_self.objectsByLayer[_object.layer][co_self.objectsByLayer[_object.layer].length] = _object;
+      that.objectsByLayer[_object.layer][that.objectsByLayer[_object.layer].length] = _object;
       return _object;
     }
 
@@ -251,22 +251,22 @@ module.exports = {
     }
 
     co_self.removeFromLayers = function(l,id){
-
-      for (var i = 0; i < co_self.objectsByLayer[l].length; i++) {
-        if(co_self.objectsByLayer[l][i].id == id) co_self.objectsByLayer[l] = co_self.objectsByLayer[l].slice(i,1);
+      that = this;
+      for (var i = 0; i < that.objectsByLayer[l].length; i++) {
+        if(that.objectsByLayer[l][i].id == id) that.objectsByLayer[l] = that.objectsByLayer[l].slice(i,1);
       }
 
     }
 
     co_self.setXFocus = function(obj){
-
-      o = co_self.getAllObjects()
-      co_self.focusXEnabled = true;
+      that = this;
+      o = that.getAllObjects()
+      that.focusXEnabled = true;
       for (var i = 0; i < o.length; i++) {
         o[i].startPosX = o[i].posX
         if((o[i].id == obj.id)){
           o[i].focus_x = true;
-          co_self.focusedObject = obj;
+          that.focusedObject = obj;
           o[i].focusPosX = o[i].posX;
         }else{
           o[i].focus_x = false;
@@ -275,20 +275,20 @@ module.exports = {
     }
 
     co_self.cancelXFocus = function(obj){
-
-      co_self.focusXEnabled = false;
+      that = this;
+      that.focusXEnabled = false;
       obj.focus_x = false;
     }
 
     co_self.setYFocus = function(obj){
-
-      o = co_self.getAllObjects()
-      co_self.focusYEnabled = true;
+      that = this;
+      o = that.getAllObjects()
+      that.focusYEnabled = true;
       for (var i = 0; i < o.length; i++) {
         o[i].startPosY = o[i].posY
         if((o[i].id == obj.id)){
           o[i].focus_y = true;
-          co_self.focusedObject = obj;
+          that.focusedObject = obj;
           o[i].focusPosY = o[i].posY;
         }else{
           o[i].focus_y = false;
@@ -297,16 +297,16 @@ module.exports = {
     }
 
     co_self.cancelYFocus = function(obj){
-
-      co_self.focusYEnabled = false;
+      that = this;
+      that.focusYEnabled = false;
       obj.focus_y = false;
     }
 
     co_self.checkVerticalColision = function(Obj,y){
-
+      that = this;
       if(Obj.solid == 0) return true;
-      if(co_self.objectsByLayer[Obj.layer].length < 2) return true
-      V_objs = co_self.objectsByLayer[Obj.layer];
+      if(that.objectsByLayer[Obj.layer].length < 2) return true
+      V_objs = this.objectsByLayer[Obj.layer];
       canMove = true;
 
       for (var i = 0; i < V_objs.length; i++) {
@@ -315,7 +315,7 @@ module.exports = {
         console.log(t.name+" l"+t.layer+" r"+t.room)
 
         if((V_objs[i].id != Obj.id) && V_objs[i].solid > 0){
-          if(co_self.checkPos(V_objs[i],Obj,Obj.posX,y) == false) {
+          if(that.checkPos(V_objs[i],Obj,Obj.posX,y) == false) {
               if(V_objs[i].name.indexOf("Player") > -1){
                 console.log(Obj.name+" r"+Obj.room+" l"+Obj.layer+" | "+V_objs[i].name+" r"+V_objs[i].room+" l"+Obj.layer)
               }
@@ -338,10 +338,10 @@ module.exports = {
     }
 
     co_self.checkHorizontalColision = function(Obj,x){
-
+      that = this;
       if(Obj.solid == 0) return true;
-      if(co_self.objectsByLayer[Obj.layer].length < 2) return true
-      H_objs = co_self.objectsByLayer[Obj.layer];
+      if(that.objectsByLayer[Obj.layer].length < 2) return true
+      H_objs = this.objectsByLayer[Obj.layer];
       canMove = true;
 
       for (var i = 0; i < H_objs.length; i++) {
@@ -350,7 +350,7 @@ module.exports = {
         console.log(t.name+" l"+t.layer+" r"+t.room)
 
         if((H_objs[i].id != Obj.id) && H_objs[i].solid > 0){
-          if(co_self.checkPos(H_objs[i],Obj,x,Obj.posY) == false) {
+          if(that.checkPos(H_objs[i],Obj,x,Obj.posY) == false) {
             if(H_objs[i].name.indexOf("Player") > -1){
               console.log(Obj.name+" r"+Obj.room+" l"+Obj.layer+" | "+H_objs[i].name+" r"+H_objs[i].room+" l"+Obj.layer)
             }
@@ -377,9 +377,7 @@ module.exports = {
         (obj2.posX < x+obj1.width) &&
 
         (obj2.posY < y+obj2.height) &&
-        (obj2.posY+obj1.height > y) &&
-
-        (obj2.room == obj1.room)
+        (obj2.posY+obj1.height > y)
 
         )
       {
@@ -395,28 +393,28 @@ module.exports = {
     co_self.windsForces = Array();
     co_self.windsForcesInterval = Array();
     co_self.startWind = function(l){
-
-      co_self.windsForcesIds++;
+      that = this;
+      that.windsForcesIds++;
       w_obj = {};
       w_obj.name = "WIND";
-      w_obj.id = co_self.windsForcesIds;
+      w_obj.id = that.windsForcesIds;
       w_obj.layer = l;
       w_obj.force = 1
       w_obj.setWindForce = function(newVal){
         this.force = newVal
       };
-      co_self.windsForces[w_obj.id] = w_obj;
+      that.windsForces[w_obj.id] = w_obj;
 
-      co_self.windsForcesInterval[w_obj.id] = setInterval(function(id){
-        layer = co_self.windsForces[id].layer;
+      that.windsForcesInterval[w_obj.id] = setInterval(function(id){
+        layer = that.windsForces[id].layer;
         makeForce = true
-        for (var k = 0; k < co_self.XFORCES.length; k++) {
-          if(co_self.XFORCES[k].layer == layer) makeForce = false;
+        for (var k = 0; k < that.XFORCES.length; k++) {
+          if(that.XFORCES[k].layer == layer) makeForce = false;
         }
-        wind_objects = co_self.objectsByLayer[layer];
+        wind_objects = that.objectsByLayer[layer];
 
         for (var i = 0; i < wind_objects.length; i++) {
-          wind_objects[i].X_Force = co_self.windsForces[id].force * wind_objects[i].windSpeed+1;
+          wind_objects[i].X_Force = that.windsForces[id].force * wind_objects[i].windSpeed+1;
 
           // if(wind_objects[i].layer != layer ) console.log(wind_objects[i].name)
           if(wind_objects[i].X_Force > 0){
@@ -435,19 +433,19 @@ module.exports = {
     co_self.gravityForcesIds = -1;
     co_self.gravityForces = Array();
     co_self.startGravity = function(l){
-
-      co_self.gravityForcesIds++;
+      that = this;
+      that.gravityForcesIds++;
       g_obj = {};
       g_obj.name = "GRAVITY";
-      g_obj.id = co_self.gravityForcesIds;
+      g_obj.id = that.gravityForcesIds;
       g_obj.layer = l;
       g_obj.force = (9.8/10)*(-1)
       g_obj.setGravity = function(newVal){
         this.force = (newVal/10)*(-1)
       };
-      co_self.gravityForces[g_obj.id] = g_obj;
+      that.gravityForces[g_obj.id] = g_obj;
 
-      co_self.gravityForcesInterval = function(parameter,id){
+      that.gravityForcesInterval = function(parameter,id){
         this.id = id
         this.layer = parameter.gravityForces[this.id].layer;
         this.gravityForce = parameter.gravityForces[this.id].force;
@@ -469,9 +467,9 @@ module.exports = {
       }
 
       intervalObject = {
-        parameter: co_self,
+        parameter: that,
         forceID: g_obj.id,
-        interval: co_self.gravityForcesInterval
+        interval: that.gravityForcesInterval
       }
 
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
@@ -482,16 +480,16 @@ module.exports = {
     co_self.XFORCESIds = -1;
     co_self.XFORCES = Array();
     co_self.startXFORCES = function(l){
-
-      co_self.XFORCESIds++;
+      that = this;
+      that.XFORCESIds++;
       xf_obj = {};
       xf_obj.name = "X_FORCE";
-      xf_obj.id = co_self.XFORCESIds;
+      xf_obj.id = that.XFORCESIds;
       xf_obj.layer = l;
 
-      co_self.XFORCES[xf_obj.id] = xf_obj;
+      that.XFORCES[xf_obj.id] = xf_obj;
 
-      co_self.XFORCESInterval = function(parameter,id){
+      that.XFORCESInterval = function(parameter,id){
         this.id = id
         this.layer = parameter.XFORCES[this.id].layer;
         this.XForces_objects = parameter.objectsByLayer[this.layer];
@@ -512,9 +510,9 @@ module.exports = {
         }
       }
       intervalObject = {
-        parameter: co_self,
+        parameter: that,
         forceID: xf_obj.id,
-        interval: co_self.XFORCESInterval
+        interval: that.XFORCESInterval
       }
 
       CANVAS_INTERVAL_FUNCTIONS[CANVAS_INTERVAL_FUNCTIONS.length] = intervalObject
@@ -527,11 +525,11 @@ module.exports = {
     co_self.EXTRAFORCES = Array();
     co_self.EXTRAFORCESInterval = Array();
     co_self.startEXTRAFORCES = function(l,axis,type){
-
-      co_self.EXTRAFORCESIds++;
+      that = this;
+      that.EXTRAFORCESIds++;
       extraxf_obj = {};
       extraxf_obj.name = "EXTRA_FORCE";
-      extraxf_obj.id = co_self.EXTRAFORCESIds;
+      extraxf_obj.id = that.EXTRAFORCESIds;
       extraxf_obj.layer = l;
       extraxf_obj.axis = axis;
       extraxf_obj.force = 1;
@@ -540,13 +538,13 @@ module.exports = {
         this.force = newVal;
       }
 
-      co_self.EXTRAFORCES[extraxf_obj.id] = extraxf_obj;
+      that.EXTRAFORCES[extraxf_obj.id] = extraxf_obj;
 
-      co_self.EXTRAFORCESInterval[extraxf_obj.id] = setInterval(function(id){
-        layer = co_self.EXTRAFORCES[id].layer;
-        axis = co_self.EXTRAFORCES[id].axis;
-        force = co_self.EXTRAFORCES[id].force;
-        EXTRAForces_objects = co_self.objectsByLayer[layer];
+      that.EXTRAFORCESInterval[extraxf_obj.id] = setInterval(function(id){
+        layer = that.EXTRAFORCES[id].layer;
+        axis = that.EXTRAFORCES[id].axis;
+        force = that.EXTRAFORCES[id].force;
+        EXTRAForces_objects = that.objectsByLayer[layer];
         for (var i = 0; i < EXTRAForces_objects.length; i++) {
           if(EXTRAForces_objects[i].static == 0 ){
             if(axis == "x"){
