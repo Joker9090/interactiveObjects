@@ -312,13 +312,10 @@ module.exports = {
       for (var i = 0; i < V_objs.length; i++) {
 
         t = V_objs[i]
-        console.log(t.name+" l"+t.layer+" r"+t.room)
 
         if((V_objs[i].id != Obj.id) && V_objs[i].solid > 0){
           if(co_self.checkPos(V_objs[i],Obj,Obj.posX,y) == false) {
-              if(V_objs[i].name.indexOf("Player") > -1){
-                console.log(Obj.name+" r"+Obj.room+" l"+Obj.layer+" | "+V_objs[i].name+" r"+V_objs[i].room+" l"+Obj.layer)
-              }
+
               if (Obj.posY > y) {
                 Obj.posY = V_objs[i].posY+Obj.height
                 if(typeof Obj.YContactFunction == "function") Obj.YContactFunction(V_objs[i],"down")
@@ -347,13 +344,10 @@ module.exports = {
       for (var i = 0; i < H_objs.length; i++) {
 
         t = H_objs[i]
-        console.log(t.name+" l"+t.layer+" r"+t.room)
 
         if((H_objs[i].id != Obj.id) && H_objs[i].solid > 0){
           if(co_self.checkPos(H_objs[i],Obj,x,Obj.posY) == false) {
-            if(H_objs[i].name.indexOf("Player") > -1){
-              console.log(Obj.name+" r"+Obj.room+" l"+Obj.layer+" | "+H_objs[i].name+" r"+H_objs[i].room+" l"+Obj.layer)
-            }
+
             if (Obj.posX > x) {
               Obj.posX = H_objs[i].posX+H_objs[i].width
               if(typeof Obj.XContactFunction == "function") Obj.XContactFunction(V_objs[i],"left")
