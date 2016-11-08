@@ -340,6 +340,7 @@ module.exports = {
       for (var i = 0; i < H_objs.length; i++) {
         if((H_objs[i].id != Obj.id) && H_objs[i].solid > 0){
           if(that.checkPos(H_objs[i],Obj,x,Obj.posY) == false) {
+            console.log(Obj.name+" "+H_objs[i].name)
             if (Obj.posX > x) {
               Obj.posX = H_objs[i].posX+H_objs[i].width
               if(typeof Obj.XContactFunction == "function") Obj.XContactFunction(V_objs[i],"left")
