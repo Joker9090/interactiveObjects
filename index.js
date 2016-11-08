@@ -1,21 +1,20 @@
-
 module.exports = {
-  CanvasObjects : function(){
-    console.log("[COM] Create CanvasObject");
-    GID = -1;
-    getID = function(){
+  console.log("[COM] Create CanvasObject");
+  CanvasObjects: {
+    this.GID = -1;
+    this.getID = function(){
       GID++;
       return GID;
     }
 
-    var CANVAS_INTERVAL_FUNCTIONS = [];
-    var CANVAS_INTERVAL = setInterval(function(){
-      for (var i = 0; i < CANVAS_INTERVAL_FUNCTIONS.length; i++) {
-        CANVAS_INTERVAL_FUNCTIONS[i].interval(CANVAS_INTERVAL_FUNCTIONS[i].parameter,CANVAS_INTERVAL_FUNCTIONS[i].forceID)
+    this.CANVAS_INTERVAL_FUNCTIONS = [];
+    this.CANVAS_INTERVAL = setInterval(function(){
+      for (var i = 0; i < this.CANVAS_INTERVAL_FUNCTIONS.length; i++) {
+        this.CANVAS_INTERVAL_FUNCTIONS[i].interval(this.CANVAS_INTERVAL_FUNCTIONS[i].parameter,this.CANVAS_INTERVAL_FUNCTIONS[i].forceID)
       }
     },10);
 
-    CanvasObjectsManager = function(C){
+    this.CanvasObjectsManager = function(C){
       this.canvas = (typeof C == "undefined") ? undefined : C;
       this.PLAYERSBYROOM = [];
       this.MAPBYROOM = [];
