@@ -316,7 +316,7 @@ module.exports = {
         if((V_objs[i].id != Obj.id) && V_objs[i].solid > 0){
           if(that.checkPos(V_objs[i],Obj,Obj.posX,y) == false) {
               if(V_objs[i].name.indexOf("Player") > -1){
-                console.log(Obj.name+" "+V_objs[i].name)
+                console.log(Obj.name+" "Obj.room+" |"+V_objs[i].name+" "V_objs[i].room)
               }
               if (Obj.posY > y) {
                 Obj.posY = V_objs[i].posY+Obj.height
@@ -346,7 +346,7 @@ module.exports = {
         if((H_objs[i].id != Obj.id) && H_objs[i].solid > 0){
           if(that.checkPos(H_objs[i],Obj,x,Obj.posY) == false) {
             if(H_objs[i].name.indexOf("Player") > -1){
-              console.log(Obj.name+" "+H_objs[i].name)
+              console.log(Obj.name+" "Obj.room+" |"+H_objs[i].name+" "H_objs[i].room)
             }
             if (Obj.posX > x) {
               Obj.posX = H_objs[i].posX+H_objs[i].width
