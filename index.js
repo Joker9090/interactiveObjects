@@ -28,6 +28,38 @@ module.exports = {
     this.focusYEnabled = false;
     this.focusedObject = {};
 
+    this.drawPosX = function(obj){
+      if(obj.type == "mapObjectNotFocused") return obj.posX
+      return (this.focusXEnabled) ? (!obj.focus_x) ? obj.posX - this.focusedObject.posX + this.focusedObject.startPosX : obj.startPosX : obj.posX;
+    };
+
+    this.drawPosY = function(obj){
+      if(obj.type == "mapObjectNotFocused") return this.fixHeightInvert(obj.posY,obj.height)
+      return  (this.focusYEnabled) ? (!obj.focus_x) ? this.fixHeightInvert(obj.posY - this.focusedObject.posY + this.focusedObject.startPosY) : this.fixHeightInvert(obj.startPosY) : this.fixHeightInvert(obj.posY);
+    };
+
+    this.setGlobalXFocus = function(obj,o){
+      o = (typeof o == undefined ) ? this.getAllObjects() : o;
+      this.focusXEnabled = true;
+      for (var i = 0; i < o.length; i++) {
+        o[i].focus_x = false;
+      }
+      this.focusedObject = obj;
+      obj.focus_x = true;
+      obj.focusPosX = obj.posX;
+    }
+
+    this.setGlobalYFocus = function(obj,o){
+      o = (typeof o == undefined ) ? this.getAllObjects() : o;
+      this.focusYEnabled = true;
+      for (var i = 0; i < o.length; i++) {
+        o[i].focus_y = false;
+      }
+      this.focusedObject = obj;
+      obj.focus_y = true;
+      obj.focusPosY = obj.posY;
+    }
+
     this.fixHeightInvert = function(y,h){
       if(typeof this.canvas == "undefined") return y
       return this.canvas.c.height - y
