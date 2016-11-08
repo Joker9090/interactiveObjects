@@ -306,7 +306,7 @@ module.exports = {
       that = this;
       if(Obj.solid == 0) return true;
       if(that.objectsByLayer[Obj.layer].length < 2) return true
-      V_objs = that.objectsByLayer[Obj.layer];
+      V_objs = this.objectsByLayer[Obj.layer];
       canMove = true;
 
       for (var i = 0; i < V_objs.length; i++) {
@@ -341,7 +341,7 @@ module.exports = {
       that = this;
       if(Obj.solid == 0) return true;
       if(that.objectsByLayer[Obj.layer].length < 2) return true
-      H_objs = that.objectsByLayer[Obj.layer];
+      H_objs = this.objectsByLayer[Obj.layer];
       canMove = true;
 
       for (var i = 0; i < H_objs.length; i++) {
