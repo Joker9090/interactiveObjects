@@ -1,21 +1,17 @@
+console.log("[COM] Create CanvasObject");
+GID = -1;
+getID = function(){
+  GID++;
+  return GID;
+}
+var CANVAS_INTERVAL_FUNCTIONS = [];
+var CANVAS_INTERVAL = setInterval(function(){
+  for (var i = 0; i < CANVAS_INTERVAL_FUNCTIONS.length; i++) {
+    CANVAS_INTERVAL_FUNCTIONS[i].interval(CANVAS_INTERVAL_FUNCTIONS[i].parameter,CANVAS_INTERVAL_FUNCTIONS[i].forceID)
+  }
+},10);
 
 module.exports = {
-  CanvasObjects : function(){
-    console.log("[COM] Create CanvasObject");
-    GID = -1;
-    getID = function(){
-      GID++;
-      return GID;
-    }
-
-    var CANVAS_INTERVAL_FUNCTIONS = [];
-    var CANVAS_INTERVAL = setInterval(function(){
-      for (var i = 0; i < CANVAS_INTERVAL_FUNCTIONS.length; i++) {
-        CANVAS_INTERVAL_FUNCTIONS[i].interval(CANVAS_INTERVAL_FUNCTIONS[i].parameter,CANVAS_INTERVAL_FUNCTIONS[i].forceID)
-      }
-    },10);
-    return this;
-  },
 
   CanvasObjectsManager : function(C){
     this.canvas = (typeof C == "undefined") ? undefined : C;
