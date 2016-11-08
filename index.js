@@ -1,5 +1,4 @@
 module.exports = {
-  console.log("[COM] Create CanvasObject");
   CanvasObjects: {
     this.GID = -1;
     this.getID = function(){
@@ -540,7 +539,6 @@ module.exports = {
       return this;
     }
 
-    return this;
   }
 
 }
