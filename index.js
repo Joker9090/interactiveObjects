@@ -234,10 +234,10 @@ module.exports = {
 
       _object = (typeof type == "object") ? that.mergeObjects(type,_object) : _object;
 
-      if(typeof co_self.objectsByLayer[_object.layer] == "undefined"){
-        co_self.objectsByLayer[_object.layer] = Array();
+      if(typeof that.objectsByLayer[_object.layer] == "undefined"){
+        that.objectsByLayer[_object.layer] = Array();
       }
-      co_self.objectsByLayer[_object.layer][co_self.objectsByLayer[_object.layer].length] = _object;
+      that.objectsByLayer[_object.layer][that.objectsByLayer[_object.layer].length] = _object;
 
 
       // _object.startPosY = _object.posY
@@ -313,7 +313,9 @@ module.exports = {
       for (var i = 0; i < V_objs.length; i++) {
         if((V_objs[i].id != Obj.id) && V_objs[i].solid > 0){
           if(that.checkPos(V_objs[i],Obj,Obj.posX,y) == false) {
-              console.log(Obj.name+" "+V_objs[i].name)
+              if(H_objs[i].name.indexOf("Player") > -1){
+                console.log(Obj.name+" "+H_objs[i].name)
+              }
               if (Obj.posY > y) {
                 Obj.posY = V_objs[i].posY+Obj.height
                 if(typeof Obj.YContactFunction == "function") Obj.YContactFunction(V_objs[i],"down")
@@ -341,7 +343,9 @@ module.exports = {
       for (var i = 0; i < H_objs.length; i++) {
         if((H_objs[i].id != Obj.id) && H_objs[i].solid > 0){
           if(that.checkPos(H_objs[i],Obj,x,Obj.posY) == false) {
-            console.log(Obj.name+" "+H_objs[i].name)
+            if(H_objs[i].name.indexOf("Player") > -1){
+              console.log(Obj.name+" "+H_objs[i].name)
+            }
             if (Obj.posX > x) {
               Obj.posX = H_objs[i].posX+H_objs[i].width
               if(typeof Obj.XContactFunction == "function") Obj.XContactFunction(V_objs[i],"left")
