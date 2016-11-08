@@ -52,6 +52,7 @@ module.exports = {
         Y_Force:0,
         X_Force:0,
         friction:0,
+        room: 0,
         wind_resistence:0,
         mass:0,
         getMasa: function(){
@@ -166,6 +167,7 @@ module.exports = {
           return false
         },
         name: "",
+        room: 0,
         canDraw: 1,
         focus_y: false,
         focus_x: false,
@@ -369,7 +371,10 @@ module.exports = {
         (obj2.posX < x+obj1.width) &&
 
         (obj2.posY < y+obj2.height) &&
-        (obj2.posY+obj1.height > y)
+        (obj2.posY+obj1.height > y) &&
+
+        (obj2.room == obj1.room)
+
         )
       {
         return false
